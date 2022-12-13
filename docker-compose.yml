@@ -1,0 +1,144 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres
+    restart: always
+    container_name: postgres
+    ports: 
+    - 5432:5432
+    networks: 
+      - bridge_overlay
+    environment:
+      POSTGRES_DB: mrbs
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: P@ssw0rd
+  pes:
+    image: pes
+    container_name: pes
+    ports: 
+    - 56368:56368
+    depends_on: 
+    - mongodb
+    networks: 
+      - bridge_overlay
+    environment:
+    - MONGO_IP=mongodb
+    - MONGO_PORT=27017
+    volumes:
+      - prm_data:/Data       
+  mongodb:
+    container_name: mongo
+    image: mongo
+    networks: 
+      - bridge_overlay
+    ports: 
+      - 27017:27017
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongo db:27017/speech-api --quiet
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    volumes:
+      - prm_db:/data/db
+    deploy:
+      resources:
+        limits:
+          memory: 4096M
+  prm:
+    build: /Users/khuchieunghi/Documents/projs/brt/prm-be
+    image: prm
+    container_name: prm
+    restart: always
+    ports: 
+      - 4430:4430
+    networks: 
+      - bridge_overlay
+    volumes:
+      - ./config/data/.env.json:/data/.env.json
+    environment:
+      - HTTPS=false
+      - NODE_ENV=production
+      - TZ=Asia/Singapore
+      - PES_HOST=pes
+      - DB_HOST=postgres
+      - REDIS_HOST=redis
+    depends_on:
+      - redis
+      - postgres 
+      - pes
+    healthcheck:
+      test: wget --quiet --tries=1 --spider http://localhost:4430 || exit 1z
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          memory: 4096M
+  wmc:
+    image: wmc
+    container_name: wmc
+    restart: always 
+    expose: 
+      - 4200
+    networks:
+      - bridge_overlay
+    depends_on: 
+      - prm
+    volumes:  
+      - prm_data:/Data 
+    healthcheck:
+      test: wget --quiet --tries=1 --spider http://localhost:4200 || exit 1z
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    environment:
+      - "TZ=Asia/Singapore"
+      - "NODE_ENV=production"
+      - "PACKAGE_VERSION=2.5.1-3.4.0-V"
+    deploy:
+      resources:
+        limits:
+          memory: 4096M
+  redis:
+    container_name: redis
+    image: redis:alpine
+    ports: 
+      - 6379:6379
+    networks: 
+      - bridge_overlay
+    environment:
+      - "ALLOW_EMPTY_PASSWORD=yes"
+    volumes:
+      - redisdb_data:/bitnami/redis/data
+      - prm_data:/Data
+  nginx:
+    image: nginx:alpine
+    ports:
+      - 80:80
+      - 443:443
+    networks: 
+      - bridge_overlay
+    depends_on:
+      - wmc
+      - prm
+    volumes:
+      - ./config/nginx/conf.d:/etc/nginx/conf.d
+      - ./config/ssl/:/etc/ssl/
+    deploy:
+      resources:
+        limits:
+          memory: 4096M
+
+networks:
+  bridge_overlay:
+    driver: overlay
+volumes:
+  prm_data:
+    driver: local
+  prm_db:
+    driver: local
+  redisdb_data:
+    driver: local
+

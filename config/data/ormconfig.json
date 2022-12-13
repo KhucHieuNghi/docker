@@ -1,0 +1,22 @@
+ [{
+   "name": "default",
+   "type": "sqlite",
+   "database": "./config/mrbs.db",
+   "synchronize": true,
+   "logging": false,
+   "entities": [
+      "src/entity/hub/*.ts",
+      "src/entity/prm/*.ts"
+   ],
+   "migrations": [
+      "src/migration/hub/*.ts"
+   ],
+   "subscribers": [
+      "src/subscribers/*.ts"
+   ],
+   "cli": {
+      "entitiesDir": "src/entity/hub",
+      "migrationsDir": "src/migration/hub",
+      "subscribersDir": "src/subscriber/hub"
+   }
+}]

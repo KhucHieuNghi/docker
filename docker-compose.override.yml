@@ -1,0 +1,25 @@
+services:
+  postgres:
+    container_name: postgres
+    image: postgres
+  mongodb:
+    container_name: mongo
+    image: mongo:4.2.3 #verion for pes ubuntu earliest 20.04
+  redis:
+    container_name: redis
+    image: redis
+  nginx:
+    container_name: nginx
+    image: nginx
+  pes:
+    container_name: pes
+    image: pes
+    build: /Users/khuchieunghi/Documents/projs/brt/prm-setup-clone/prm-parse/pes
+  prm:
+    container_name: prm
+    image: prm
+    build: /Users/khuchieunghi/Documents/projs/brt/prm-be
+  wmc:
+    container_name: wmc
+    image: wmc
+    build: /Users/khuchieunghi/Documents/projs/brt/prm-fe
