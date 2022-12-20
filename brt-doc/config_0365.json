@@ -1,0 +1,34 @@
+{
+  "CALENDAR": {
+    "EWS_CAL_PERMISSION": 2, 
+    "EWS_IMP_PWD": "12345678@X", 
+    "EWS_IMP_USER": "prm-dev1@hdbstest5.onmicrosoft.com", 
+    "EWS_SCHEMA": "Exchange2013", 
+    "EWS_URL": "https://outlook.office365.com/EWS/Exchange.asmx", 
+    "EXCHANGE_AUTHENTICATION": 0
+  }, 
+  "CATERING": {
+    "CATERING_AD_EMAIL": "prm-dev1@hdbstest5.onmicrosoft.com", 
+    "CATERING_AD_NAME": "AdminDev"
+  }, 
+  "DEFAULT_ADMIN": {
+    "DEFAULT_ADMIN1": "prm-dev1@hdbstest5.onmicrosoft.com", 
+    "DEFAULT_ADMIN1_PWD": "12345678@X", 
+    "DEFAULT_ADMIN2": "prm-dev1@hdbstest5.onmicrosoft.com", 
+    "DEFAULT_ADMIN2_PWD": "12345678@X"
+  }, 
+  "EMAIL": {
+    "SYSTEM_ADMIN_NAME": "AdminDev", 
+    "SYSTEM_EMAIL": "prm-dev1@hdbstest5.onmicrosoft.com", 
+    "SYSTEM_EMAIL_PWD": "12345678@X", 
+    "WELCOME_EMAIL": "prm-dev1@hdbstest5.onmicrosoft.com"
+  }, 
+  "EQUIPMENT": {
+    "EQUIP_AD_EMAIL": "prm-dev1@hdbstest5.onmicrosoft.com", 
+    "EQUIP_AD_NAME": "AdminDev"
+  },
+  "SMTP": {
+    "SMTP_ADDRESS": "smtp.office365.com", 
+    "SMTP_PORT": 587
+  }
+}

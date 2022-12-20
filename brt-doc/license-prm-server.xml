@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<memories>
+<memory fileID="1" name="Read/Write Memory (HASP_FILEID_RW)">
+<segments></segments>
+</memory>
+<memory fileID="2" name="Read-Only Memory (HASP_FILEID_RO)">
+<segments>
+<segment>
+<offset>0x0000</offset>
+<length>2048</length>
+<color>#137ad0</color>
+<name>MemData</name>
+<description/>
+<free_memory>true</free_memory>
+<base64data>AQABDAABCgAKAAAACgAKABD/X2MQ9qBnAgoACgAAAAoACgAQ/19jEPagZwMKAAoAAAAKAAoAEP9fYxD2oGcECgAKAAAACgAKABD/X2MQ9qBnBQoACgAAAAoACgAQ/19jEPagZwYKAAoAAAAKAAoAEP9fYxD2oGcHCgAKAAAACgAKABD/X2MQ9qBnCAoACgAAAAoACgAQ/19jEPagZwkKAAoAAAAKAAoAEP9fYxD2oGcKCgAKAAAACgAKABD/X2MQ9qBnCwoACgAAAAoACgAQ/19jEPagZwwKAAoAAAAKAAoAEP9fYxD2oGeikDwp</base64data>
+</segment>
+</segments>
+</memory>
+</memories>
